@@ -1,4 +1,5 @@
 * text=auto !eol
 /apertium-ky-en.en.dix -text
+/apertium-ky-en.ky-en.rlx -text
 /apertium-ky-en.ky.lexc -text
 /apertium-ky-en.ky.twol -text
