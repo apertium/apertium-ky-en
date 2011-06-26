@@ -16,6 +16,7 @@ Multichar_Symbols
 %<postadv%> ! Postadverb
 %<part%>    ! Particle
 %<abbr%>    ! Abbreviation
+%<ij%>      ! Interjection 
 %<cnjcoo%>  ! Coordinating conjunction
 %<cnjadv%>  ! Adverbial conjunction
 %<cnjsub%>  ! Subordinating conjunction
@@ -76,6 +77,7 @@ Multichar_Symbols
 %<cv_perf%> ! Converb perfect, -Iп
 %<cv_irre%> ! Converb irrealis, -Eт
 %<cv_fut%>  ! Converb future, -Aр
+%<cv_pur%>  ! Converb purpose, -GAнI
 
 %<pres%>    ! Present tense
 %<aor%>     ! Aorist, -E
@@ -83,6 +85,7 @@ Multichar_Symbols
 %<opt%>     ! Optative, -мAк>чI
 %<past%>    ! Past tense
 %<pih%>     ! Past habitual
+%<pot%>     ! Potential, -чUдAй
 %<ifi%>     ! Definite past 
 %<fut%>     ! Future tense, -AAр
 %<pp%>      ! Past participle, -GAн
@@ -92,6 +95,7 @@ Multichar_Symbols
 %<inf2%>    ! Verbal noun, -иш
 
 %<sent%>    ! Sentence marker
+%<guio%>    ! Hyphen
 %<cm%>      ! Comma
 %<pst%>     ! Positive level of comparison
 %<comp%>    ! Comparative level of comparison 
@@ -124,6 +128,7 @@ Postpositions ;
 Conjunctions ;
 Determiners ;
 Pronouns ;
+Postadverbs ;
 Numerals ;
 NounStems ;
 PropernounStems ;
@@ -131,6 +136,7 @@ AdjecStems ;
 AdvStems ;
 VerbStems ;
 Punctuation ;
+Interjections ;
 Abbreviations ;
 
 LEXICON CASES-SHORT-ACC
@@ -138,6 +144,14 @@ LEXICON CASES-SHORT-ACC
 %<gen%>:%>%{N%}%{I%}н # ;      ! -нын, -нин, -дын, -дин, -тын, -тин, -нун, -нүн, -дун, -дүн, -тун, -түн
 %<dat%>:%>%{G%}%{A%} # ;       ! -га, -ка, -ге, -ке, -го, -ко, -гө, -кө
 %<acc%>:%>%{N%} # ;            ! -ны, -ни, -ды, -ди, -ты, -ти, -ну, -нү, -ду, -дү, -ту, -тү
+%<loc%>:%>%{D%}%{A%} # ;       ! -да, -де, -та, -те, -до, -дө, -то, -тө
+%<abl%>:%>%{D%}%{A%}н # ;      ! -дан, -ден, -тан, -тен, -дон, -дөн, -тон, -төн
+%<rloc%>:%>%{D%}%{A%}г%{I%} # ;
+
+LEXICON OBL-CASES
+%<gen%>:%>%{N%}%{I%}н # ;      ! -нын, -нин, -дын, -дин, -тын, -тин, -нун, -нүн, -дун, -дүн, -тун, -түн
+%<dat%>:%>%{G%}%{A%} # ;       ! -га, -ка, -ге, -ке, -го, -ко, -гө, -кө
+%<acc%>:%>%{N%}%{I%} # ;       ! -ны, -ни, -ды, -ди, -ты, -ти, -ну, -нү, -ду, -дү, -ту, -тү
 %<loc%>:%>%{D%}%{A%} # ;       ! -да, -де, -та, -те, -до, -дө, -то, -тө
 %<abl%>:%>%{D%}%{A%}н # ;      ! -дан, -ден, -тан, -тен, -дон, -дөн, -тон, -төн
 %<rloc%>:%>%{D%}%{A%}г%{I%} # ;
@@ -170,6 +184,10 @@ GEN-POS ;
 %<px2pl%>%<frm%>:%>%{I%}ң%{I%}зд%{A%}р GEN-POS;
 %<px3pl%>:%>с%{I%} GEN-POS-SHORT-ACC ;
 
+LEXICON N-INFL-SG
+
+%<n%>: POSSESSION ;
+
 LEXICON N-INFL
 
 %<n%>: POSSESSION ;
@@ -191,9 +209,13 @@ LEXICON NP-ORG
 
 %<np%>%<org%>: CASES ;
 
+LEXICON NP-TOP-ASSR
+
+%<np%>%<top%>: POSSESSION ;
+
 LEXICON NP-TOP
 
-%<np%>%<top%>: CASES ;
+%<np%>%<top%>: POSSESSION ;
 
 
 LEXICON ADJ-LEVELS
@@ -225,6 +247,10 @@ LEXICON CA
 
 %<cnjadv%>: # ;
 
+LEXICON CS
+
+%<cnjsub%>: # ;
+
 LEXICON CC
 
 %<cnjcoo%>: # ;
@@ -248,6 +274,11 @@ LEXICON PART-PERS-PAST
 LEXICON ABBR
 
 %<abbr%>: # ;
+
+LEXICON INTERJ
+
+%<ij%>: # ;
+
 
 LEXICON DET-DEM
 
@@ -280,6 +311,10 @@ NumeralList ;
 %, NumeralList  ;
 %%%<num%>:%% CASES ;
 Num ;
+
+LEXICON NUM-ROMAN
+
+%<num%>: CASES ;
 
 LEXICON NUM
 
@@ -441,21 +476,20 @@ LEXICON V-INFL-COMMON
 
 ! Converbs 
 %<cv_impf%>:%>%{E%} # ;                                       !
-%<cv_perf%>:%>%{I%}п # ;                                      ! -ып, -ип, -уп, -үп
+!%<cv_perf%>:%>%{I%}п # ;                                      ! -ып, -ип, -уп, -үп
+%<cv_perf%>:%>п # ;                                      ! -ып, -ип, -уп, -үп
 %<cv_inf%>:%>м%{A%}к # ;                                      !
 %<cv_irre%>:%>%{E%}т # ;                                      !
 %<cv_fut%>:%>%{A%}р # ;                                       !
 %<cv_fut%>:%>%{A%}%{A%}р # ;                                  ! Dir/LR
+%<cv_pur%>:%>%{G%}%{A%}н%{I%} # ;                             ! 
 
 ! Non-finite forms and participles
 %<pp%>:%>%{G%}%{A%}н POSSESSION ;                             ! -
-%<pp2%>:%>%{G%}%{A%}н%{I%} POSSESSION ;                       ! 
-%<inf%>:%>%{U%}%{U%} # ;                                      ! 
-%<inf2%>:%>%{I%}ш # ;                                         ! -ыш, -иш, -уш, -үш
+%<inf2%>:%>%{I%}ш POSSESSION ;                                ! -ыш, -иш, -уш, -үш
 %<neg%>%<pp%>:%>%{B%}%{A%}%>%{G%}%{A%}н POSSESSION ;          !
 %<neg%>%<pp2%>:%>%{B%}%{A%}%>%{G%}%{A%}н%{I%} POSSESSION ;    ! 
-%<neg%>%<inf%>:%>%{B%}%{A%}%>%{I%}%{I%} # ;                   !
-%<neg%>%<inf2%>:%>%{B%}%{A%}%>%{I%}ш # ;                      !
+%<neg%>%<inf2%>:%>%{B%}%{A%}%>%{I%}ш POSSESSION ;             !
 %<plist%>:%>м%{A%}й # ;                                       !
 
 ! Finite forms
@@ -468,7 +502,8 @@ LEXICON V-INFL-COMMON
 %<cond%>:%>с%{A%} V-PERS-PAST ;                               ! 
 %<opt%>:%>м%{A%}к%>ч%{I%} V-PERS-COP ;                        !   
 %<pih%>:%>ч%{U%} V-PERS-COP ;                                 ! 
-%<pcond%>:%>м%{A%}к V-PERS-COP ;          ! 
+%<pot%>:%>ч%{U%}%>д%{A%}й V-PERS-COP ;                        ! 
+%<pcond%>:%>м%{A%}к V-PERS-COP ;                              ! 
 
 %<neg%>%<pres%>:%>%{B%}%{A%} V-PERS-PRES ;                    ! TODO: Check
 %<neg%>%<fut%>:%>%{B%}%{A%}%>%{A%}р V-PERS-COP ;              !
@@ -483,14 +518,28 @@ LEXICON V-INFL-COMMON
 LEXICON V-INFL
 
 %<v%>%<TD%>: V-INFL-COMMON ;
+%<v%>%<TD%>%<inf%>:%>%{U%}%{U%} POSSESSION ;                    ! 
+%<v%>%<TD%>%<neg%>%<inf%>:%>%{B%}%{A%}%>%{U%}%{U%} POSSESSION ; !
+
+LEXICON V-INFL-TV-SHORT
+
+%<v%>%<tv%>: V-INFL-COMMON ;
+
+LEXICON V-INFL-IV-SHORT
+
+%<v%>%<iv%>: V-INFL-COMMON ;
 
 LEXICON V-INFL-TV
 
 %<v%>%<tv%>: V-INFL-COMMON ;
+%<v%>%<tv%>%<inf%>:%>%{U%}%{U%} POSSESSION ;                                      ! 
+%<v%>%<tv%>%<neg%>%<inf%>:%>%{B%}%{A%}%>%{U%}%{U%} POSSESSION ;                   !
 
 LEXICON V-INFL-IV
 
 %<v%>%<iv%>: V-INFL-COMMON ;
+%<v%>%<iv%>%<inf%>:%>%{U%}%{U%} POSSESSION ;                                      ! 
+%<v%>%<iv%>%<neg%>%<inf%>:%>%{B%}%{A%}%>%{U%}%{U%} POSSESSION ;                   !
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!                  L E X I C O N    E N T R I E S                         !!!
@@ -513,6 +562,7 @@ LEXICON Postadverbs
 
 гана POSTADV ; ! "only"
 эле POSTADV ; ! "only"
+деле POSTADV ; ! "even"
 
 LEXICON Conjunctions 
 
@@ -523,6 +573,8 @@ LEXICON Conjunctions
 не CC ; ! "neither... nor..."
 ал CA ; ! "but"
 бирок CA ; ! "but"
+анткени CS ; ! "because"
+себеби CS ; ! "because"
 
 LEXICON Postpositions
 
@@ -531,7 +583,7 @@ LEXICON Postpositions
 чейин POST ; ! "up to, until"
 кийин POST ; ! "with"
 сайын POST ; ! "every"
-үчүн POST ; ! "for"
+үчүн POST ; ! "for" +nom
 жакка POST ; ! "toward"
 чакты POST ; ! "about, around"
 катары POST ; ! "as a" +nom
@@ -542,6 +594,9 @@ LEXICON Postpositions
 боюнча POST ; ! "according to" +nom
 жөнүнд POST ; ! "about" +nom
 жөнүндө POST ; ! "about" +nom
+тиешелүү POST ; ! "belonging to" +dat
+карата POST ; ! "" +dat
+
 
 LEXICON Determiners
 
@@ -552,10 +607,13 @@ LEXICON Determiners
 тигил DET-DEM ; ! "that (yonder)"
 
 айрым DET-IND ; ! "other"
+ушундай DET-IND ; ! "this kind of"
 
 кээ% бир DET-QNT ; ! "some"
 бир% нече DET-QNT ; ! "some, several"
 көптөгөн DET-QNT ; ! "many"
+
+кайсы DET-ITG ; ! "which?"
 
 LEXICON Pronouns
 
@@ -574,10 +632,13 @@ LEXICON Pronouns
 тигил:тиги PRON-DEM-TIGIL ; ! "that (yonder)
 
 эмне PRON-ITG ; ! "what?"
+кайсыны PRON-ITG ; ! "which?"
+ким PRON-ITG ; ! "who?"
 
 өз PRON-REFL ; ! "own/self"
 
 айрым PRON-IND ; ! "other"
+баары PRON-IND ; ! "everyone"
 
 кээ% бир PRON-QNT ; ! "some"
 бир% нече PRON-QNT ; ! "some, several"
@@ -608,8 +669,35 @@ LEXICON Numerals
 миллион NUM ; ! "one million"
 миллиард NUM ; ! "one billion"
 
+
+I NUM-ROMAN ; ! ""
+II NUM-ROMAN ; ! ""
+III NUM-ROMAN ; ! ""
+IV NUM-ROMAN ; ! ""
+V NUM-ROMAN ; ! ""
+VI NUM-ROMAN ; ! ""
+VII NUM-ROMAN ; ! ""
+VIII NUM-ROMAN ; ! ""
+IX NUM-ROMAN ; ! ""
+X NUM-ROMAN ; ! ""
+XI NUM-ROMAN ; ! ""
+XI NUM-ROMAN ; ! ""
+XII NUM-ROMAN ; ! ""
+XIII NUM-ROMAN ; ! ""
+XIV NUM-ROMAN ; ! ""
+XV NUM-ROMAN ; ! ""
+XVI NUM-ROMAN ; ! ""
+XVII NUM-ROMAN ; ! ""
+XVIII NUM-ROMAN ; ! ""
+XX NUM-ROMAN ; ! ""
+XXI NUM-ROMAN ; ! ""
+XIX NUM-ROMAN ; ! ""
+
+
 LEXICON NounStems
 аалым N-INFL ; 
+поэзия N-INFL ; 
+гвардия N-INFL ; 
 аары N-INFL ; 
 аба N-INFL ; 
 абажур N-INFL ; 
@@ -799,7 +887,6 @@ LEXICON NounStems
 арыз N-INFL ; 
 аскер N-INFL ; ! "soldier" 
 аста N-INFL ; 
-ата N-INFL ; 
 атак-даңк N-INFL ; 
 аферист N-INFL ; 
 аалам N-INFL ; 
@@ -920,7 +1007,8 @@ LEXICON NounStems
 бажа N-INFL ; 
 байрак N-INFL ; 
 бакыт N-INFL ; 
-бала N-INFL ; ! "child"
+бала N-INFL-SG ; ! "child"
+бала%<n%>%<pl%>:балдар POSSESSION ; ! "children"
 балдыз N-INFL ; 
 балта N-INFL ; 
 балтыркан N-INFL ; 
@@ -1166,7 +1254,6 @@ LEXICON NounStems
 бок N-INFL ; 
 мончок N-INFL ; 
 бороон N-INFL ; 
-бой N-INFL ; 
 уруу N-INFL ; 
 урук N-INFL ; 
 жамаат N-INFL ; 
@@ -1189,7 +1276,6 @@ LEXICON NounStems
 буудай N-INFL ; 
 буу N-INFL ; 
 бөйрөк N-INFL ; 
-бөлүк N-INFL ; 
 бөрк N-INFL ; 
 былтыр N-INFL ; 
 өткөн% жылы N-INFL ; 
@@ -1206,7 +1292,6 @@ LEXICON NounStems
 пиджак N-INFL ; 
 желдет N-INFL ; 
 жамаат N-INFL ; 
-эл N-INFL ; 
 журт N-INFL ; 
 жамаат N-INFL ; 
 жаназа N-INFL ; 
@@ -1214,7 +1299,6 @@ LEXICON NounStems
 жасат N-INFL ; 
 дене N-INFL ; 
 тулку N-INFL ; 
-бой N-INFL ; 
 жооп N-INFL ; 
 жаза N-INFL ; 
 жихат N-INFL ; 
@@ -1347,7 +1431,6 @@ LEXICON NounStems
 экперт N-INFL ; 
 экспертиза N-INFL ; 
 экстра N-INFL ; 
-эл N-INFL ; 
 калк N-INFL ; 
 журт N-INFL ; 
 кол N-INFL ; 
@@ -1420,7 +1503,6 @@ LEXICON NounStems
 фашизм N-INFL ; 
 федерализм N-INFL ; 
 федерация N-INFL ; 
-философия N-INFL ; 
 феминизм N-INFL ; 
 феномен N-INFL ; 
 феноменализм N-INFL ; 
@@ -1571,7 +1653,6 @@ LEXICON NounStems
 керек N-INFL ; 
 акарат N-INFL ; 
 калк N-INFL ; 
-эл N-INFL ; 
 канжар N-INFL ; 
 аракет N-INFL ; 
 тамга N-INFL ; 
@@ -1582,7 +1663,7 @@ LEXICON NounStems
 айбан N-INFL ; 
 азирети N-INFL ; 
 муун N-INFL ; 
-эже N-INFL ; 
+эже N-INFL ; ! ""
 гектар N-INFL ; 
 халва N-INFL ; 
 гепатит N-INFL ; 
@@ -1935,6 +2016,8 @@ LEXICON NounStems
 лотерея N-INFL ; 
 лунапарк N-INFL ; 
 медаль N-INFL ; 
+комуз N-INFL ;
+медал N-INFL ;
 медальон N-INFL ; 
 мадам N-INFL ; 
 магнезий N-INFL ; 
@@ -2246,7 +2329,6 @@ LEXICON NounStems
 педагог N-INFL ; 
 педагогика N-INFL ; 
 педаль N-INFL ; 
-ата N-INFL ; 
 падар N-INFL ; 
 педикюр N-INFL ; 
 пенициллин N-INFL ; 
@@ -2339,6 +2421,15 @@ LEXICON NounStems
 ыраң N-INFL ; 
 репертуар N-INFL ; 
 репродукция N-INFL ; 
+продукция N-INFL ; 
+диссертация N-INFL ; 
+экспозиция N-INFL ; 
+компания N-INFL ; 
+акредитация N-INFL ; 
+биология N-INFL ; 
+археология N-INFL ; 
+коммуникация N-INFL ; 
+империя N-INFL ; 
 ресторан N-INFL ; 
 реставрация N-INFL ; 
 реставрация N-INFL ; 
@@ -2867,7 +2958,6 @@ LEXICON NounStems
 карыз N-INFL ; 
 катнаш N-INFL ; 
 алаамат N-INFL ; 
-майдан N-INFL ; 
 конгуроо N-INFL ; 
 шылдың N-INFL ; 
 гипс N-INFL ; 
@@ -2968,7 +3058,6 @@ LEXICON NounStems
 тема N-INFL ; 
 көрсөткүч N-INFL ; 
 кабар N-INFL ; 
-ата N-INFL ; 
 мор N-INFL ; 
 бут N-INFL ; 
 аки N-INFL ; 
@@ -2976,7 +3065,6 @@ LEXICON NounStems
 байланыш N-INFL ; 
 шылтоо N-INFL ; 
 бахарат N-INFL ; 
-жаз N-INFL ; 
 бакча N-INFL ; 
 мелдеш N-INFL ; 
 бактыяр N-INFL ; 
@@ -3111,7 +3199,6 @@ LEXICON NounStems
 түр N-INFL ; 
 эр N-INFL ; 
 сызгыч N-INFL ; 
-жооп N-INFL ; 
 каухар N-INFL ; 
 сталь N-INFL ; 
 жангак N-INFL ; 
@@ -3142,7 +3229,6 @@ LEXICON NounStems
 нерсе N-INFL ; 
 жак N-INFL ; 
 чийин N-INFL ; 
-бала N-INFL ; 
 көптүк N-INFL ; 
 көпчүлүк N-INFL ; 
 чыбык N-INFL ; 
@@ -3469,7 +3555,6 @@ LEXICON NounStems
 хатип N-INFL ; 
 көңүл N-INFL ; 
 абаа N-INFL ; 
-котор N-INFL ; 
 сабиз N-INFL ; 
 кыял N-INFL ; 
 жашоо N-INFL ; 
@@ -3522,7 +3607,6 @@ LEXICON NounStems
 облас N-INFL ; 
 жармашкан N-INFL ; 
 катнаш N-INFL ; 
-жаз N-INFL ; 
 өлкө N-INFL ; 
 илмек N-INFL ; 
 карамак N-INFL ; 
@@ -3596,15 +3680,16 @@ LEXICON NounStems
 парта N-INFL ; 
 кино N-INFL ; 
 терезе N-INFL ; 
-жүзүм N-INFL ; 
+!жүзүм N-INFL ;  ! is this a numeral ? -FMT
 кулун N-INFL ; 
 кагаз N-INFL ; 
 өрт N-INFL ; 
 орус N-INFL ;
 повесть N-INFL ;
+писатель N-INFL ;
 айыл N-INFL ;
 союз N-INFL ;
-Жазуучу N-INFL ;
+жазуучу N-INFL ;
 поэма N-INFL ;
 мүчө N-INFL ;
 түрк N-INFL ;
@@ -3618,15 +3703,12 @@ LEXICON NounStems
 өз N-INFL ;
 гезит N-INFL ;
 казак N-INFL ;
-бөлүм N-INFL ;
 катар N-INFL ;
 негиз N-INFL ;
 маданият N-INFL ;
-эл N-INFL ;
 мисал N-INFL ;
 тил N-INFL ;
 маани N-INFL ;
-Энциклопедия N-INFL ;
 кытай N-INFL ;
 сын N-INFL ;
 облус N-INFL ;
@@ -3665,12 +3747,53 @@ LEXICON NounStems
 жылдык N-INFL ;
 орунбасар N-INFL ;
 орун% басар N-INFL ;
+таала N-INFL ;
+баатыр N-INFL ;
+май N-INFL ;
+грамота N-INFL ;
+манасчы N-INFL ;
+профессор N-INFL ;
+окумуштуу N-INFL ;
+ырчы N-INFL ;
+окуучу N-INFL ;
+окутуучу N-INFL ;
+энциклопедия N-INFL ;
+история N-INFL ;
+түркология N-INFL ;
+антропология N-INFL ;
+фумигация N-INFL ;
+репрессия N-INFL ;
+кез N-INFL ;
+кыштак N-INFL ;
+котормочу N-INFL ;
+журналистика N-INFL ;
+маек N-INFL ;
+сөздүк N-INFL ;
+түр N-INFL ;
+уч N-INFL ; ! "tip, point"
+жооптуу N-INFL ;
+даярдоо N-INFL ;
+иштөө N-INFL ;
+жарыя N-INFL ;
+сактоо N-INFL ;
 орун%<n%>%<nom%>%<cmpd%>%+басар:орун% басар N-INFL ;
+чейинки N-INFL ; 
 
 LEXICON PropernounStems
 
 Баласагын NP-TOP ;
+Киров NP-TOP ;
+Якутия NP-TOP ;
+Жапония NP-TOP ;
+Грузия NP-TOP ;
+Византия NP-TOP ;
+София NP-TOP ;
+Евразия NP-TOP ;
+Орусия NP-TOP ;
+Орусия:Россия NP-TOP ; ! Dir/LR
 Москва NP-TOP ;
+Монголия NP-TOP ;
+Германия NP-TOP ;
 Ташкент NP-TOP ;
 Ирландия NP-TOP ;
 Италия NP-TOP ;
@@ -3690,6 +3813,17 @@ LEXICON PropernounStems
 Нарын NP-TOP ;
 Фрунзе NP-TOP ;
 СССР NP-TOP ;
+
+Кыргыз% ССР NP-TOP-ASSR ;
+Кыргыз% АССР NP-TOP-ASSR ;
+Туркестан% АССР NP-TOP-ASSR ; ! ""
+Казак% АССР NP-TOP-ASSR ; ! ""
+Өзбек% ССР NP-TOP-ASSR ; ! ""
+Украина% ССР NP-TOP-ASSR ; ! ""
+Тажик% ССР NP-TOP-ASSR ; ! ""
+Татар% АССР NP-TOP-ASSR ; ! ""
+Каракалпак% АССР NP-TOP-ASSR ; ! ""
+
 Aзирейил NP-TOP ; ! ""
 Tеңир NP-TOP ; ! ""
 Адам NP-TOP ; ! ""
@@ -3797,9 +3931,12 @@ Tеңир NP-TOP ; ! ""
 Өзбекстан NP-TOP ; ! "Uzbekistan"
 Азия NP-TOP ; ! "Asia"
 Чоң% Алай NP-TOP ; ! ""
+Ташкент NP-TOP ;
+Жалал% Абад NP-TOP ;
 
 Кыргызмамбас NP-ORG ; ! ""
 Киргизгосиздат NP-ORG ; ! "" (ru)
+Ленинчил NP-ORG ; ! "" 
 Кыргызокуупедмамбас NP-ORG ; ! "Kyrgyz Pedagogical State Press"
 
 Бишкек NP-TOP ; ! "Bishkek"
@@ -3815,18 +3952,156 @@ Tеңир NP-TOP ; ! ""
 Манас NP-ANT-M ;
 Ардак NP-ANT-M ;
 
+Мария NP-ANT-F ; ! "Marija"
+Юлия NP-ANT-F ; ! "Julija"
+София NP-ANT-F ; ! "Sofija"
+
 Ленин NP-COG-MF ; ! "Lenin"
-Ашым NP-ANT-M ; 
+Ашым NP-ANT-M ; ! ""
 Фрунзе NP-COG-MF ; ! "Frunze"
-Айтматов NP-COG-MF ;
+Айтматов NP-COG-MF ; ! ""
+Орокчиев NP-COG-MF ; ! ""
+Абдрахманов NP-COG-MF ; ! ""
+Абдумомунов NP-COG-MF ; ! ""
+Абдуразаков NP-COG-MF ; ! ""
+Абдыкадыров NP-COG-MF ; ! ""
+Абдыкалыков NP-COG-MF ; ! ""
+Абдырахманов NP-COG-MF ; ! ""
+Айдаров NP-COG-MF ; ! ""
+Айтматов NP-COG-MF ; ! ""
+Акматов NP-COG-MF ; ! ""
+Актанов NP-COG-MF ; ! ""
+Акунов NP-COG-MF ; ! ""
+Алагушов NP-COG-MF ; ! ""
+Алмамбетов NP-COG-MF ; ! ""
+Алымкулов NP-COG-MF ; ! ""
+Аристов NP-COG-MF ; ! ""
+Асанов NP-COG-MF ; ! ""
+Ауэзов NP-COG-MF ; ! ""
+Байжигитов NP-COG-MF ; ! ""
+Байзаков NP-COG-MF ; ! ""
+Байтемиров NP-COG-MF ; ! ""
+Бактыгулов NP-COG-MF ; ! ""
+Батырканов NP-COG-MF ; ! ""
+Баялинов NP-COG-MF ; ! ""
+Бектенов NP-COG-MF ; ! ""
+Белеков NP-COG-MF ; ! ""
+Валиханов NP-COG-MF ; ! ""
+Гамзатов NP-COG-MF ; ! ""
+Гилязетдинов NP-COG-MF ; ! ""
+Дооров NP-COG-MF ; ! ""
+Жакшылыков NP-COG-MF ; ! ""
+Жакыпбеков NP-COG-MF ; ! ""
+Жакыпов NP-COG-MF ; ! ""
+Жапаров NP-COG-MF ; ! ""
+Жигитов NP-COG-MF ; ! ""
+Жирков NP-COG-MF ; ! ""
+Жумагулов NP-COG-MF ; ! ""
+Жумакматов NP-COG-MF ; ! ""
+Жунусов NP-COG-MF ; ! ""
+Жусупов NP-COG-MF ; ! ""
+Жээнбеков NP-COG-MF ; ! ""
+Ибраимов NP-COG-MF ; ! ""
+Иванов NP-COG-MF ; ! ""
+Исаков NP-COG-MF ; ! ""
+Кадыров NP-COG-MF ; ! ""
+Каназаров NP-COG-MF ; ! ""
+Карагулов NP-COG-MF ; ! ""
+Каримов NP-COG-MF ; ! ""
+Касымбеков NP-COG-MF ; ! ""
+киргизов NP-COG-MF ; ! ""
+Киров NP-COG-MF ; ! ""
+Көбөнов NP-COG-MF ; ! ""
+Кожобеков NP-COG-MF ; ! ""
+Кудайбергенов NP-COG-MF ; ! ""
+Куров NP-COG-MF ; ! ""
+Күрүчбеков NP-COG-MF ; ! ""
+Лермонтов NP-COG-MF ; ! ""
+Ломоносов NP-COG-MF ; ! ""
+Макешов NP-COG-MF ; ! ""
+Маликов NP-COG-MF ; ! ""
+Мамбетов NP-COG-MF ; ! ""
+Мамытов NP-COG-MF ; ! ""
+Меньшиков NP-COG-MF ; ! ""
+Мифтаков NP-COG-MF ; ! ""
+Молдобасанов NP-COG-MF ; ! ""
+Молдокасымов NP-COG-MF ; ! ""
+Нааматов NP-COG-MF ; ! ""
+народов NP-COG-MF ; ! ""
+Ниязов NP-COG-MF ; ! ""
+Өмүрбеков NP-COG-MF ; ! ""
+Өмүрзаков NP-COG-MF ; ! ""
+Орозобеков NP-COG-MF ; ! ""
+Орозов NP-COG-MF ; ! ""
+Осмонкулов NP-COG-MF ; ! ""
+Осмонов NP-COG-MF ; ! ""
+Панфилов NP-COG-MF ; ! ""
+Петров NP-COG-MF ; ! ""
+Прозоров NP-COG-MF ; ! ""
+Радлов NP-COG-MF ; ! ""
+Раззаков NP-COG-MF ; ! ""
+Рыскулов NP-COG-MF ; ! ""
+Садыков NP-COG-MF ; ! ""
+Самаганов NP-COG-MF ; ! ""
+Сатылганов NP-COG-MF ; ! ""
+Сулайманов NP-COG-MF ; ! ""
+Султанов NP-COG-MF ; ! ""
+Сыдыкбеков NP-COG-MF ; ! ""
+Сыдыков NP-COG-MF ; ! ""
+Таштемиров NP-COG-MF ; ! ""
+Токтогулов NP-COG-MF ; ! ""
+Төрөбеков NP-COG-MF ; ! ""
+Турсунов NP-COG-MF ; ! ""
+Турусбеков NP-COG-MF ; ! ""
+Тыныбеков NP-COG-MF ; ! ""
+Тыныстанов NP-COG-MF ; ! ""
+Удалов NP-COG-MF ; ! ""
+Урмамбетов NP-COG-MF ; ! ""
+Урманбетов NP-COG-MF ; ! ""
+Урстанбеков NP-COG-MF ; ! ""
+Урустанбеков NP-COG-MF ; ! ""
+Усманов NP-COG-MF ; ! ""
+Усубакунов NP-COG-MF ; ! ""
+Халидов NP-COG-MF ; ! ""
+Хасанов NP-COG-MF ; ! ""
+Худяков NP-COG-MF ; ! ""
+Чехов NP-COG-MF ; ! ""
+Чокморов NP-COG-MF ; ! ""
+Шабданов NP-COG-MF ; ! ""
+Шайбеков NP-COG-MF ; ! ""
+Шеркулов NP-COG-MF ; ! ""
+Шүкүрбеков NP-COG-MF ; ! ""
+Шүкүров NP-COG-MF ; ! ""
+Эрматов NP-COG-MF ; ! ""
+Эшмамбетов NP-COG-MF ; ! ""
+Эшматов NP-COG-MF ; ! ""
 
 
 LEXICON AdjecStems
 
 алгачкы ADJ-ORD ; ! "first"
 экинчи ADJ-ORD ; ! "second"
+ушундай ADJ ;
 
+зор ADJ ;
+чейинки ADJ ;
+түз ADJ ;
+чакан ADJ ;
+улук ADJ ;
+ири ADJ ;
+расмий ADJ ;
+таза ADJ ;
+майда ADJ ;
+ыйык ADJ ;
+жогору ADJ ;
+маданий ADJ ;
+чет ADJ ;
 начар ADJ ;
+диний ADJ ;
+табигый ADJ ;
+орусча ADJ ;
+татыктуу ADJ ;
+кесиптик ADJ ;
 азыркы ADJ ; ! "modern"
 элдик ADJ ; ! "people's"
 башкы ADJ ; ! "principle 
@@ -4043,6 +4318,41 @@ suyuk ADJ ;
 өзгөчө ADJ ; 
 аз ADJ ; 
 адабий ADJ ;
+жооптуу ADJ ;
+кыргызча ADJ ;
+
+азиялык ADJ ; ! ""
+академиялык ADJ ; ! ""
+антиколониялык ADJ ; ! ""
+археологиялык ADJ ; ! ""
+биологиялык ADJ ; ! ""
+географиялык ADJ ; ! ""
+дезинсекциялык ADJ ; ! ""
+демократиялык ADJ ; ! ""
+дипломатиялык ADJ ; ! ""
+диссертациялык ADJ ; ! ""
+индиялык ADJ ; ! ""
+италиялык ADJ ; ! ""
+конституциялык ADJ ; ! ""
+лабораториялык ADJ ; ! ""
+монархиялык ADJ ; ! ""
+орусиялык ADJ ; ! ""
+орфографиялык ADJ ; ! ""
+партиялык ADJ ; ! ""
+редакциялык ADJ ; ! ""
+россиялык ADJ ; ! ""
+симфониялык ADJ ; ! ""
+тарбиялык ADJ ; ! ""
+традициялык ADJ ; ! ""
+физиологиялык ADJ ; ! ""
+философиялык ADJ ; ! ""
+фиялык ADJ ; ! ""
+химиялык ADJ ; ! ""
+экологиялык ADJ ; ! ""
+энциклопедиялык ADJ ; ! ""
+этимологиялык ADJ ; ! ""
+этнографиялык ADJ ; ! ""
+
 
 LEXICON AdvStems
 
@@ -4060,6 +4370,8 @@ LEXICON AdvStems
 
 негизинде ADV ; ! "basically, in general"
 эртеси ADV ; 
+ошондуктан ADV ;  ! "that's why"
+өзүнчө ADV ;  ! "by oneself"
 көп ADV ; 
 жок ADV ; 
 ар% дайым ADV ; 
@@ -4067,6 +4379,7 @@ LEXICON AdvStems
 негизи ADV ; 
 дагы ADV ; 
 бирок ADV ; 
+кыскача ADV ; 
 мурда ADV ; 
 бирдикте ADV ; 
 каршы ADV ; 
@@ -4212,7 +4525,8 @@ LEXICON VerbStems
 бол V-INFL-IV ; ! "be"
 чыгар V-INFL-TV ; ! "" 
 
-
+аарчы V-INFL-IV ;  ! ""
+аарчы V-INFL-TV ;  ! ""
 айлант V-INFL-TV ; ! "give headache"
 айт V-INFL-IV ; ! "tell"
 айт V-INFL-TV ; ! "tell"
@@ -4220,17 +4534,24 @@ LEXICON VerbStems
 ас V-INFL-TV ; ! "hang"
 ат V-INFL-TV ; ! "shoot"
 ач V-INFL-TV ; ! "open"
+аш V-INFL-IV ; 
 бар V-INFL-IV ; ! "go"
 бил V-INFL-TV ; ! "know"
+де V-INFL-TV-SHORT ; ! "say"
 жат V-INFL-IV ; ! "come"
+же V-INFL-TV-SHORT ; ! "eat"
+жет V-INFL-IV ; 
 ич V-INFL-IV ; ! "drink"
 ич V-INFL-TV ; ! "drink"
+иште V-INFL-IV ;  ! "work"
 кел V-INFL-IV ; ! "come"
 кет V-INFL-IV ; ! "go"
+кой V-INFL-TV ; ! "put, place" 
 күл V-INFL-IV ; ! "smile, laugh"
 оку V-INFL-IV ; ! "read"
 оку V-INFL-TV ; ! "read"
 окшо V-INFL-IV ; ! "be similar to"
+саба V-INFL-TV ;  ! ""
 сүй V-INFL-TV ; ! "love"
 таң% ат V-INFL-TV ; ! "dawn"
 тур V-INFL-IV ; ! "stand, live"
@@ -4239,31 +4560,20 @@ LEXICON VerbStems
 ук V-INFL-TV ; ! "listen"
 укта V-INFL-IV ; ! "sleep"
 чий V-INFL-TV ; ! "draw a line"
-аш V-INFL-IV ; 
-жет V-INFL-IV ; 
-иште V-INFL-IV ;  ! "work"
-аарчы V-INFL-IV ;  ! ""
-аарчы V-INFL-TV ;  ! ""
-саба V-INFL-TV ;  ! ""
+ач V-INFL-TV ; ! "open"
+бар V-INFL-TV ; ! "go"
+бил V-INFL-IV ; ! "know"
 
 
-! TODO: Categorise for transitivity, and remove duplicate entries
-агыт V-INFL ; 
-азайт V-INFL ; 
-айда V-INFL ; ! "drive"
-айыпта V-INFL ; 
-акырында V-INFL ; 
-ал V-INFL ; 
-алдан V-INFL ; 
-алкыш% кыл V-INFL ; 
-алып% кел V-INFL ; 
+отур V-INFL ; ! "sit"
+бар V-INFL ; 
 аракет% кыл V-INFL ; 
-арна% ет V-INFL ; 
+арна V-INFL ; 
 аякта V-INFL ; 
 бак V-INFL ; 
 башта V-INFL ; 
 без V-INFL ; 
-бер V-INFL ; 
+бер V-INFL-TV ; 
 билдир V-INFL ; 
 билин V-INFL ; 
 боё V-INFL ; 
@@ -4280,7 +4590,7 @@ LEXICON VerbStems
 быш V-INFL ; 
 бүк V-INFL ; 
 бүктө V-INFL ; 
-бүт V-INFL ; 
+бүт V-INFL-IV ; 
 бөл V-INFL ; 
 гий V-INFL ; 
 гэр V-INFL ; 
@@ -4289,7 +4599,7 @@ LEXICON VerbStems
 де V-INFL ; ! "say"
 елестет V-INFL ; 
 жаа V-INFL ; 
-жаз V-INFL ; 
+жаз V-INFL-TV ; 
 жай V-INFL ; 
 жан V-INFL ; 
 жаркыра V-INFL ; 
@@ -4314,11 +4624,12 @@ LEXICON VerbStems
 илгериле V-INFL ; 
 кайнат V-INFL ; 
 кал V-INFL ; 
-кара V-INFL ; 
+кара V-INFL-IV ; 
+кара V-INFL-TV ;
 карма V-INFL ; 
 кары V-INFL ; 
 карышта V-INFL ; 
-кат V-INFL ; 
+кат V-INFL-TV ; 
 керек V-INFL ; 
 кес V-INFL ; 
 кеч V-INFL ; 
@@ -4336,7 +4647,7 @@ LEXICON VerbStems
 кучакта V-INFL ; 
 кый% ет V-INFL ; 
 кыйна V-INFL ; 
-кыл V-INFL ; 
+кыл V-INFL-TV ; 
 кырк V-INFL ; 
 кыс V-INFL ; 
 күй V-INFL ; 
@@ -4366,7 +4677,7 @@ LEXICON VerbStems
 сайра V-INFL ; 
 салаңда V-INFL ; 
 салкында V-INFL ; 
-сана V-INFL ; 
+сана V-INFL-TV ; 
 сез V-INFL ; 
 секир V-INFL ; 
 секир V-INFL ; 
@@ -4376,7 +4687,7 @@ LEXICON VerbStems
 сун V-INFL ; 
 сура V-INFL ; 
 сыз V-INFL ; 
-сыйла V-INFL ; 
+сыйла V-INFL-TV ; 
 сыла V-INFL ; 
 сүз V-INFL ; 
 сүйлө V-INFL ; ! "speak"
@@ -4414,7 +4725,6 @@ LEXICON VerbStems
 төк V-INFL ; 
 төлө V-INFL ; 
 узат V-INFL ; 
-уч V-INFL ; 
 ушала V-INFL ; 
 чак V-INFL ; 
 чакыр V-INFL ; 
@@ -4442,6 +4752,33 @@ LEXICON VerbStems
 өрттө V-INFL ; 
 өч V-INFL ; 
 өчүр V-INFL ; 
+ал V-INFL-TV ;
+тарт V-INFL-IV ;
+жайгаш V-INFL-IV ;
+сиңир V-INFL ;
+ата V-INFL-TV ;
+котор V-INFL-TV ;
+эсепте V-INFL-TV ;
+жүр V-INFL-TV ;
+тааны V-INFL-TV ;
+бас V-INFL-IV ;
+өт V-INFL-TV ;
+колдон V-INFL-TV ;
+сал V-INFL-TV ;
+маектеш V-INFL ;
+жаса V-INFL-IV ;
+жарыяла V-INFL-TV ;
+түз V-INFL-IV ;
+белгиле V-INFL-TV ;
+катыш V-INFL ;
+тий V-INFL-TV ;
+сакта V-INFL-TV ;
+тый V-INFL ;
+жүргүз V-INFL ;
+кач V-INFL-IV ;
+кач V-INFL-TV ;
+көч V-INFL-IV ;
+ыйгар V-INFL ;
 
 LEXICON Abbreviations
 
@@ -4454,11 +4791,18 @@ LEXICON Abbreviations
 б%.а%. ABBR ; ! башкача айтканда "in other words"
 б%.з%.ч%. ABBR ; ! биздин заманга чейинки "B.C.E."
 ж%.б%.у%.с%. ABBR ; ! жана башка ушул сыяктуу "and similar"
+№ ABBR ; 
+ISBN ABBR ; 
+
+LEXICON Interjections 
+
+aлбетте INTERJ ; ! "of course"
 
 LEXICON Punctuation
 
 .%<sent%>:. # ;
 %;%<sent%>:%; # ;
 %:%<sent%>:%: # ;
+%-%<guio%>:%- # ;
 ,%<cm%>:, # ;
 %?%<sent%>:%? # ; 
