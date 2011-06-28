@@ -126,7 +126,7 @@ Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _
 !!              matched ; 
 
 "Voiceless non-coronal stop voicing"
-Cx:Cy <=> :SurVow _ %>: :SurVow ; 
+Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ; 
         where Cx in (  п   к  )
               Cy in (  б   г  )
               matched ;
