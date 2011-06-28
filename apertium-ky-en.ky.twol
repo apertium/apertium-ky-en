@@ -104,12 +104,26 @@ Vx:Vy <=> :LastVowel NotVowel:* _ ;
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
 
-"Vowel harmony for archiphoneme {E}"
-Vx:Vy <=> :LastVowel NotVowel:* _ ; 
+"{E} turns to й after a vowel"
+%{E%}:й <=> :SurVow %>: _ ;
+
+!!"Realisation of converb marker after vowels"
+!!%{E%}:й <=> SurVow %>: _ ;
+
+
+"Vowel harmony for archiphoneme {E}" ! should be just like {A}
+Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
         where Vx         in ( %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} )
               Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
+
+!!"Vowel harmony for archiphoneme {E}"
+!!Vx:Vy <=> :LastVowel NotVowel:* _ ; 
+!!        where Vx         in ( %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} )
+!!              Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
+!!              LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
+!!              matched ; 
 
 "Voiceless non-coronal stop voicing"
 Cx:Cy <=> :SurVow _ %>: :SurVow ; 
@@ -120,9 +134,6 @@ Cx:Cy <=> :SurVow _ %>: :SurVow ;
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-"Realisation of converb marker after vowels"
-%{E%}:й <=> SurVow %>: _ ;
 
 !"Harmonise stem ending before infinitive"
 !Vx:Vy <=> Cns _ %>: %{U%}: %{U%}: ; 
