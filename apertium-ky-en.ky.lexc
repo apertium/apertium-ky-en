@@ -170,8 +170,8 @@ LEXICON CASES
 
 LEXICON GEN-POS
 CASES ;
-%<px%>:%>%{N%}%{I%}к%{I%}%{n%} # ; !CASES-SHORT-ACC ; 
-%<rloc%>:%>%{D%}%{A%}г%{I%} # ;
+%<px%>:%>%{N%}%{I%}к%{I%}%{n%} # CASES ; !CASES-SHORT-ACC ; 
+%<rloc%>:%>%{D%}%{A%}г%{I%} # CASES ;
 
 !! LEXICON GEN-POS-SHORT-ACC
 !! CASES-SHORT-ACC ;
