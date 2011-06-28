@@ -1,7 +1,7 @@
 Alphabet
 А Б В Г Д Е Ё Ж З И И К Л М Н Ң О Ө П Р С Т У Ү Ф Х Ц Ч Ш Щ Ь Ы Ъ Э Ю Я
 а б в г д е ё ж з и й к л м н ң о ө п р с т у ү ф х ц ч ш щ ь ы ъ э ю я
-%{G%}:г %{D%}:д %{N%}:н %{L%}:л %{B%}:б %{P%}:п 
+%{G%}:г %{D%}:д %{N%}:н %{L%}:л %{B%}:б %{P%}:п %{S%}:с %{n%}:н
 %{A%}:а %{I%}:ы %{U%}:у %{E%}:а 
 %>:0 ; 
 
@@ -14,8 +14,9 @@ Sets
 !%{L%}       ! Realised as 'л', 'д', 'т'
 
 Cns = Б В Г Д Ж З Й К Л М Н Ң П Р С Т Ф Х Ц Ч Ш Щ Ь Ъ 
-	  б в г д ж з й к л м н ң п р с т ф х ц ч ш щ ь ъ 
-	  %{D%} %{G%} %{N%} %{L%} %{B%} %{P%} ;
+      б в г д ж з й к л м н ң п р с т ф х ц ч ш щ ь ъ 
+      %{D%} %{G%} %{N%} %{L%} %{B%} ;
+      !%{D%} %{G%} %{N%} %{L%} %{B%} %{P%} %{S%} %{n%} ;
 
 !%{E%}       ! Realised as 'а', 'е', 'о', 'ө', 'й' 
 !%{A%}       ! Realised as 'а', 'е', 'о', 'ө' 
@@ -34,9 +35,9 @@ BackVow = А О У Ы а о у ы Я я Ю ю ;
 FrontUnrndVow = И Е Э и э е ; 
 BackUnrndVow = А Ы а ы Я я ;
 FrontRndVow = Ө Ү ө ү ;
-BackRndVow =  О У о у Ю ю ;
+BackRndVow =  О У о у Ю ю Ё ё ;
 BackLowRndVow = О о Ё ё ;
-UyanCons = м ң М Ң ;
+!! UyanCons = м ң М Ң ;
 
 SonCns = й р Й Р ;
 UnvoicedNonSonCns = К П С Т Ф Х Ц Ч Ш Щ  
@@ -45,7 +46,7 @@ UnvoicedNonSonCns = К П С Т Ф Х Ц Ч Ш Щ
 VoicedNonSonCns = Б В Г Д Ж З Л М Н Ң Й Р 
                   б в г д ж з л м н ң й р ;
 
-VoicedNonSonCnsNoRNoIj = Б В Г Д Ж З Л М Н Ң  
+VoicedNonSonCnsNoRNoY = Б В Г Д Ж З Л М Н Ң  
                   б в г д ж з л м н ң ;
 
 ! These three sets include the suffix border, and accounts for long-distance VH
@@ -64,35 +65,48 @@ NotVowel = Cns %> ;
 	   
 Rules
 
-!"Suffix vowel deletion in vowel stems"
-!Vx:0 <=> SurVow: %>: _ ;
-!        where Vx in (  и  ү  ы  у  ) 
-!        matched ; 
+"Vowel deletion for archiphoneme {I}"
+%{I%}:0 <=> :SurVow (%>:) _ ;
 
-!"Suffix vowel deletion in vowel stems"
-!%{I%}:0 <=> SurVow: %>: _ NotVowel ; 
+"Soft sign deletion before suffix"
+ь:0 <=> _ %>: ;
+
+"/n/ deletion in px3 nominative"
+%{n%}:0 <=> _ # ;
+
+!"Deletion of {S} after a consonant"
+!%{S%}:0 <=> Cns (%>:) _ ;
+!!%{S%}:0 <=> Cns: (%>:) _ ;
+
+!!"Suffix vowel deletion in vowel stems"
+!!Vx:0 <=> SurVow: %>: _ ;
+!!        where Vx in (  и  ү  ы  у  ) 
+!!        matched ; 
+
+!!"Suffix vowel deletion in vowel stems"
+!!%{I%}:0 <=> SurVow: %>: _ NotVowel ; 
 
 !0:%{I%} <=> Cns: %>: _ NotVowel: .#. ; 
 
-"Suffix vowel {I} insertion in consonant stems"
-0:Vy <=> :LastVowel NotVowel:* Cns: %>: _ NotVowel: .#. ; 
-      where Vy in        (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
-            LastVowel in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
-       matched;
+!!"Suffix vowel {I} insertion in consonant stems"
+!!0:Vy <=> :LastVowel NotVowel:* Cns: %>: _ NotVowel: .#. ; 
+!!      where Vy in        (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
+!!            LastVowel in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
+!!       matched;
 
 "Vowel harmony for archiphoneme {A}"
-Vx:Vy <=> :LastVowel NotVowel:* _ ; 
+Vx:Vy <=> :LastVowel :Cns* :Cns (%>:) _ ; 
         where Vx         in ( %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} )
-              Vy         in (   а     а     е     е     е     а     а     ө     ө     о     о     ө   )
-              LastVowel  in (   я     а     е     э     и     ы     ю     у     ө     ё     о     ү   )
+              Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
+              LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
 
 "Vowel harmony for archiphoneme {I}"
-Vx:Vy <=> :LastVowel NotVowel:* _ ; 
+Vx:Vy <=> :LastVowel :Cns* :Cns (%>:) _ ;
         where Vx         in ( %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} )
               Vy         in (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
-              matched ; 
+              matched ;
 
 "Vowel harmony for archiphoneme {U}"
 Vx:Vy <=> :LastVowel NotVowel:* _ ; 
@@ -104,27 +118,18 @@ Vx:Vy <=> :LastVowel NotVowel:* _ ;
 "Vowel harmony for archiphoneme {E}"
 Vx:Vy <=> :LastVowel NotVowel:* _ ; 
         where Vx         in ( %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} )
-              Vy         in (   а     а     е     е     е     а     а     ө     ө     о     о     ө   )
-              LastVowel  in (   я     а     е     э     и     ы     ю     у     ө     ё     о     ү   )
+              Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
+              LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
 
-"Voiceless non-coronal stop voicing"
-Cx:Cy <=> Vow _ %>: Vow ; 
-        where Cx in (  п   к  )
-              Cy in (  б   г  )
-              matched ;
+!"Voiceless non-coronal stop voicing"
+!Cx:Cy <=> :SurVow _ %>: :SurVow ; 
+!        where Cx in (  п   к  )
+!              Cy in (  б   г  )
+!              matched ;
 
-"Voiceless non-coronal stop voicing before possessive"
-Cx:Cy <=> Vow _ %>: с: %{I%}: ;
-        where Cx in (  п   к  )
-              Cy in (  б   г  )
-              matched ;
-
-"{D} -> н after {I} and before {A} in ablative" 
-%{D%}:н <=> %{I%}: %>: _ %{A%}: н ;
-
-"Мягкий знак deletion before suffix"
-ь:0 <=> _ %>: ;
+!"{D} -> н after {I} and before {A} in ablative" 
+!%{D%}:н <=> %{I%}: %>: _ %{A%}: н ;
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -149,74 +154,74 @@ Cx:Cy <=> Vow _ %>: с: %{I%}: ;
 !%{U%}:0 <=> Vow %>: _ %{U%}: ; 
 
 
-
-
 !
-!"Front Unrnd harmony in suffixes"
-!Vx:Vy <=> :FrontUnrndVow CnsFrontUnrndVowSB:* Cns %>:     CnsFrontUnrndVow:* _ ; !  ?C>?_
-!          :FrontUnrndVow CnsFrontUnrndVowSB:*     %>: Cns CnsFrontUnrndVow:* _ ; !   ?>C_
-!	where Vx in ( %{A%} %{I%} %{U%} %{E%} )
-!	      Vy in (   е     и     ү     е   )
-!	      matched ;
-!
-!"Front Rnd harmony in suffixes"
-!Vx:Vy <=> :FrontRndVow CnsFrontRndVowSB:* Cns %>:     CnsFrontRndVow:* _ ; ! ?C>?_
-!          :FrontRndVow CnsFrontRndVowSB:*     %>: Cns CnsFrontRndVow:* _ ; !  ?>C_
-!	where Vx in ( %{A%} %{I%} %{U%} %{E%} )
-!	      Vy in (   ө     ү     ү     ө   )
-!	      matched ;
-!
-!"Back Low Rnd harmony in suffixes"
-!Vx:Vy <=> :BackLowRndVow CnsBackLowRndVow:* Cns %>:     CnsBackLowRndVow:* _ ; ! ?C>?_
-!          :BackLowRndVow CnsBackLowRndVow:*     %>: Cns CnsBackLowRndVow:* _ ; !  ?>C_
-!        where Vx in ( %{A%} %{I%} %{U%} %{E%} ) 
-!              Vy in (   о     у     у     о   )
-!              matched ; 
-!
-!"Back High Rnd harmony in suffixes"
-!Vx:Vy <=> :BackRndVow CnsBackRndVowSB:* Cns %>:     CnsBackRndVow:* _ ; ! ?C>?_
-!            :BackRndVow CnsBackRndVowSB:*     %>: Cns CnsBackRndVow:* _ ; !  ?>C_
-!        where Vx in (       %{I%} %{U%} %{E%} )
-!              Vy in (         у     у     о   )
-!              matched ; 
-!
+!!"Front Unrnd harmony in suffixes"
+!!Vx:Vy <=> :FrontUnrndVow CnsFrontUnrndVowSB:* Cns %>:     CnsFrontUnrndVow:* _ ; !  ?C>?_
+!!          :FrontUnrndVow CnsFrontUnrndVowSB:*     %>: Cns CnsFrontUnrndVow:* _ ; !   ?>C_
+!!	where Vx in ( %{A%} %{I%} %{U%} %{E%} )
+!!	      Vy in (   е     и     ү     е   )
+!!	      matched ;
+!!
+!!"Front Rnd harmony in suffixes"
+!!Vx:Vy <=> :FrontRndVow CnsFrontRndVowSB:* Cns %>:     CnsFrontRndVow:* _ ; ! ?C>?_
+!!          :FrontRndVow CnsFrontRndVowSB:*     %>: Cns CnsFrontRndVow:* _ ; !  ?>C_
+!!	where Vx in ( %{A%} %{I%} %{U%} %{E%} )
+!!	      Vy in (   ө     ү     ү     ө   )
+!!	      matched ;
+!!
+!!"Back Low Rnd harmony in suffixes"
+!!Vx:Vy <=> :BackLowRndVow CnsBackLowRndVow:* Cns %>:     CnsBackLowRndVow:* _ ; ! ?C>?_
+!!          :BackLowRndVow CnsBackLowRndVow:*     %>: Cns CnsBackLowRndVow:* _ ; !  ?>C_
+!!        where Vx in ( %{A%} %{I%} %{U%} %{E%} ) 
+!!              Vy in (   о     у     у     о   )
+!!              matched ; 
+!!
+!!"Back High Rnd harmony in suffixes"
+!!Vx:Vy <=> :BackRndVow CnsBackRndVowSB:* Cns %>:     CnsBackRndVow:* _ ; ! ?C>?_
+!!            :BackRndVow CnsBackRndVowSB:*     %>: Cns CnsBackRndVow:* _ ; !  ?>C_
+!!        where Vx in (       %{I%} %{U%} %{E%} )
+!!              Vy in (         у     у     о   )
+!!              matched ; 
+!!
 
-"L Desonorisation"
-%{L%}:д <=> VoicedNonSonCnsNoRNoIj %>:  _ ;
+!"L Desonorisation"
+!%{L%}:д <=> VoicedNonSonCnsNoRNoY %>:  _ ;
 
-"N Desonorisation"
-%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
+!"N Desonorisation"
+!%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
 
-"L Desonorisation and devoicing"
-Cx:т <=> [ UnvoicedNonSonCns | UnvoicedNonSonCns ь ] %>: _ ;
-	where Cx in ( %{L%} %{N%} ) ;
+!"L Desonorisation and devoicing"
+!Cx:т <=> [ UnvoicedNonSonCns | UnvoicedNonSonCns ь ] %>: _ ;
+!	where Cx in ( %{L%} %{N%} ) ;
 
-"Katkalan harmony in consonants"
-Cx:Cy <=>  UnvoicedNonSonCns %>: _ ;
-        where Cx in ( %{G%}  %{D%}  )
-              Cy in (   к      т    )
-              matched;
+!"Devoicing of stops across morpheme boundary after voiceless consonants" !"Katkalan harmony in consonants"
+!Cx:Cy <=>  :UnvoicedNonSonCns %>: _ ;   !Cx:Cy <=>  UnvoicedNonSonCns %>: _ ;
+!        where Cx in ( %{B%}  %{G%}  %{D%}  )
+!              Cy in (   п      к      т    )
+!              matched;
 
-!"Katkalan harmony in consonants 2"
-!%{G%}:к <=> UnvoicedNonSonCns %>: _ ;
-!
-!"Katkalan harmony in consonants 1"
-!%{D%}:т <=> UnvoicedNonSonCns %>: _ ;
+!! LEXICON
+!!"'с' deletion in possessive after consonant"
+!!с:0 <=> Cns %>: _ %{I%}: ; 
 
-"'с' deletion in possessive after consonant"
-с:0 <=> Cns %>: _ %{I%}: ; 
+!! LEXICON
+!!"'г' deletion after uyan consonants"
+!!%{G%}:0 <=> UyanCons: %>: _ %{A%}: ;
+!! уяң means sonorants; this is wrong.
+!! it can't even be after м and ң, e.g., там+га, таң+га
+!! this should *only* be after px1sg and px2sg
 
-"'г' deletion after uyan consonants"
-%{G%}:0 <=> UyanCons: %>: _ %{A%}: ;
+!! LEXICON
+!!"'г' desonorisation after I"
+!!%{G%}:н <=> %{I%}: %>: _ %{A%}: ;
 
-"'г' desonorisation after I"
-%{G%}:н <=> %{I%}: %>: _ %{A%}: ;
+!! LEXICON
+!!"'н' addition between {I} and {D} in locative" 
+!!0:н <=> %{I%}: %>: _ %{D%}: %{A%}: [ \н | .#. ] ;
 
-"'н' addition between {I} and {D} in locative" 
-0:н <=> %{I%}: %>: _ %{D%}: %{A%}: [ \н | .#. ] ;
+!! "B -> п in negative"  ! not just negative, but everywhere
+!! %{B%}:п <=> UnvoicedNonSonCns: %>: _  ;
 
-"B -> п in negative"
-%{B%}:п <=> UnvoicedNonSonCns: %>: _  ;
 
 !иште<v><iv><inf>:иште>{U}{U}
 !                 иштө>{U}{U}
