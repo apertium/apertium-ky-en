@@ -15,7 +15,7 @@ Sets
 
 Cns = Б В Г Д Ж З Й К Л М Н Ң П Р С Т Ф Х Ц Ч Ш Щ Ь Ъ 
       б в г д ж з й к л м н ң п р с т ф х ц ч ш щ ь ъ 
-      %{D%} %{G%} %{N%} %{L%} %{B%} ;
+      %{D%} %{G%} %{N%} %{L%} %{B%} %{S%} %{n%} ;
       !%{D%} %{G%} %{N%} %{L%} %{B%} %{P%} %{S%} %{n%} ;
 
 !%{E%}       ! Realised as 'а', 'е', 'о', 'ө', 'й' 
@@ -74,8 +74,8 @@ Rules
 "/n/ deletion in px3 nominative"
 %{n%}:0 <=> _ # ;
 
-!"Deletion of {S} after a consonant"
-!%{S%}:0 <=> Cns (%>:) _ ;
+"Deletion of {S} after a consonant"
+%{S%}:0 <=> :Cns :0* (%>:) _ ;
 !!%{S%}:0 <=> Cns: (%>:) _ ;
 
 !!"Suffix vowel deletion in vowel stems"
@@ -95,14 +95,14 @@ Rules
 !!       matched;
 
 "Vowel harmony for archiphoneme {A}"
-Vx:Vy <=> :LastVowel :Cns* :Cns (%>:) _ ; 
+Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
         where Vx         in ( %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} )
               Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
 
 "Vowel harmony for archiphoneme {I}"
-Vx:Vy <=> :LastVowel :Cns* :Cns (%>:) _ ;
+Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ;
         where Vx         in ( %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} %{I%} )
               Vy         in (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
