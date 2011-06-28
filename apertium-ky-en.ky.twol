@@ -43,11 +43,17 @@ SonCns = й р Й Р ;
 UnvoicedNonSonCns = К П С Т Ф Х Ц Ч Ш Щ  
 	                к п с т ф х ц ч ш щ ;
 
-VoicedNonSonCns = Б В Г Д Ж З Л М Н Ң Й Р 
-                  б в г д ж з л м н ң й р ;
+VoicedCns = Б В Г Д Ж З Л М Н Ң Й Р
+            б в г д ж з л м н ң й р ;
 
-VoicedNonSonCnsNoRNoY = Б В Г Д Ж З Л М Н Ң  
+VoicedLowSonCns = Б В Г Д Ж З Л М Н Ң
                   б в г д ж з л м н ң ;
+
+!VoicedNonSonCns = Б В Г Д Ж З Л М Н Ң Й Р    ! This is half sonorants!
+!                  б в г д ж з л м н ң й р ;
+!
+!VoicedNonSonCnsNoRNoY = Б В Г Д Ж З Л М Н Ң  
+!                  б в г д ж з л м н ң ;
 
 ! These three sets include the suffix border, and accounts for long-distance VH
 CnsFrontUnrndVowSB = Cns FrontUnrndVow %> ;
@@ -151,10 +157,10 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
 !%{U%}:0 <=> Vow %>: _ %{U%}: ; 
 
 "L Desonorisation"
-%{L%}:д <=> VoicedNonSonCnsNoRNoY %>:  _ ;
+%{L%}:д <=> VoicedLowSonCns %>: _ ;
 
 "N Desonorisation"
-%{N%}:д <=> Cns %>: _ ;
+%{N%}:д <=> VoicedCns %>: _ ;
 !%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
 
 !"L Desonorisation and devoicing"
