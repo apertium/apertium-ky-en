@@ -132,8 +132,8 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
 
 "Deletion of dative {G} after px1sg, px2sg"
 !%{G%}:0 <=> :NasalCns* (%>:) _ ;
-!%{G%}:0 <=>  %{I%}: :NasalCns %>: _ %{A%}: .#. ;
-%{G%}:0 <=> :NasalCns %>: _ %{A%}: .#. ;
+!%{G%}:0 <=> :NasalCns %>: _ %{A%}: .#. ;
+%{G%}:0 <=>  %{I%}: :NasalCns %>: _ %{A%}: .#. ;
 
 "L Desonorisation"
 %{L%}:д <=> VoicedLowSonCns %>: _ ;
