@@ -147,7 +147,7 @@ Cx:0 <=> %{n%}: %>: _ ;
 		        matched;
 
 "Deletion of extra {I} for accusative after {n}"
-{I}:0 <=> %{n%}: %>: :0 _ .#. ;
+%{I%}:0 <=> %{n%}: %>: :0 _ .#. ;
 
 !!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
 
