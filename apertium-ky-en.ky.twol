@@ -78,7 +78,7 @@ Rules
 ь:0 <=> _ %>: ;
 
 "/n/ deletion in px3 nominative"
-%{n%}:0 <=> _ # ;
+%{n%}:0 <=> _ .#. ;
 
 "Deletion of {S} after a consonant"
 %{S%}:0 <=> :Cns :0* (%>:) _ ;
@@ -147,7 +147,12 @@ Cx:0 <=> %{n%}: %>: _ ;
 		        matched;
 
 "Deletion of extra {I} for accusative after {n}"
-%{I%}:0 <=> %{n%}: %>: %{N%}:0 _ .#. ;
+!%{I%}:0 <=> %{n%}: %>: %{N%}: _ .#. ;
+%{N%}%{I%}:0 <=> %{n%}: %>: _ .#. ;
+
+"Deletion of dative {G} after px1sg, px2sg"
+%{G%}:0 <=> [ :м | :ң ] %>: _ %{A%}: ;
+
 
 !!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
 
