@@ -79,7 +79,9 @@ Rules
 
 
 "Vowel harmony for archiphoneme {A}"
-Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
+!Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]*  [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
+!Vx:Vy <=> :LastVowel %>: :0 Cns %>: :0 _ ;
+Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]*  [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns | [ :0 | %>: | :Cns ]* :Cns [ :0 | %>: | :Cns ]* ] _ ; 
         where Vx         in ( %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} %{A%} )
               Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
@@ -116,9 +118,10 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
               matched ;
 
 "Deletion of case-initial consonants after {n} (except locative)"
-Cx:0 <=> %{n%}: %>: _ ;
-        where Cx in ( %{N%} %{G%} )
-		        matched;
+!Cx:0 <=> %{n%}: %>: _ ;
+!        where Cx in ( %{N%} %{G%} )
+!		        matched;
+%{N%}:0 <=> %{n%}: %>: _ ;
 
 "Deletion of ablative-initial {D} after {n}"
 %{D%}:0 <=> %{n%}: %>: _ %{A%}: :н ;
@@ -128,7 +131,9 @@ Cx:0 <=> %{n%}: %>: _ ;
 !%{I%}:0 <=> %{n%}: %>: %{N%}: _ .#. ;
 
 "Deletion of dative {G} after px1sg, px2sg"
-%{G%}:0 <=>  %{I%}: NasalCns %>: _ %{A%}: .#. ;
+!%{G%}:0 <=> :NasalCns* (%>:) _ ;
+!%{G%}:0 <=>  %{I%}: :NasalCns %>: _ %{A%}: .#. ;
+%{G%}:0 <=> :NasalCns %>: _ %{A%}: .#. ;
 
 "L Desonorisation"
 %{L%}:д <=> VoicedLowSonCns %>: _ ;
