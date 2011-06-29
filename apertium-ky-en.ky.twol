@@ -151,7 +151,7 @@ Cx:0 <=> %{n%}: %>: _ ;
 %{N%}%{I%}:0 <=> %{n%}: %>: _ .#. ;
 
 "Deletion of dative {G} after px1sg, px2sg"
-%{G%}:0 <=> [ :м | :ң ] %>: _ %{A%}: ;
+%{G%}:0 <=> %{I%}: [ :м | :ң ] %>: _ %{A%}: .#. ;
 
 
 !!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
