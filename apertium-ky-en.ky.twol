@@ -37,9 +37,6 @@ BackUnrndVow = А Ы а ы Я я ;
 FrontRndVow = Ө Ү ө ү ;
 BackRndVow =  О У о у Ю ю Ё ё ;
 BackLowRndVow = О о Ё ё ;
-!! UyanCons = м ң М Ң ;
-
-!!SonCns = й р Й Р ;
 NasalCns = м н ң
            М Н Ң ;
 
@@ -51,12 +48,6 @@ VoicedCns = Б В Г Д Ж З Л М Н Ң Й Р
 
 VoicedLowSonCns = Б В Г Д Ж З Л М Н Ң
                   б в г д ж з л м н ң ;
-
-!VoicedNonSonCns = Б В Г Д Ж З Л М Н Ң Й Р    ! This is half sonorants!
-!                  б в г д ж з л м н ң й р ;
-!
-!VoicedNonSonCnsNoRNoY = Б В Г Д Ж З Л М Н Ң  
-!                  б в г д ж з л м н ң ;
 
 ! These three sets include the suffix border, and accounts for long-distance VH
 CnsFrontUnrndVowSB = Cns FrontUnrndVow %> ;
@@ -86,11 +77,6 @@ Rules
 "Deletion of {S} after a consonant"
 %{S%}:0 <=> :Cns :0* (%>:) _ ;
 
-!!"Suffix vowel {I} insertion in consonant stems"
-!!0:Vy <=> :LastVowel NotVowel:* Cns: %>: _ NotVowel: .#. ; 
-!!      where Vy in        (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
-!!            LastVowel in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
-!!       matched;
 
 "Vowel harmony for archiphoneme {A}"
 Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
@@ -116,10 +102,6 @@ Vx:Vy <=> :LastVowel NotVowel:* _ ;
 "{E} turns to й after a vowel"
 %{E%}:й <=> :SurVow %>: _ ;
 
-!!"Realisation of converb marker after vowels"
-!!%{E%}:й <=> SurVow %>: _ ;
-
-
 "Vowel harmony for archiphoneme {E}" ! should be just like {A}
 Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _ ; 
         where Vx         in ( %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} )
@@ -133,10 +115,6 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
               Cy in (  б   г  )
               matched ;
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 "Deletion of case-initial consonants after {n} (except locative)"
 Cx:0 <=> %{n%}: %>: _ ;
         where Cx in ( %{N%} %{G%} )
@@ -146,12 +124,48 @@ Cx:0 <=> %{n%}: %>: _ ;
 %{D%}:0 <=> %{n%}: %>: _ %{A%}: :н ;
 
 "Deletion of extra {I} for accusative after {n}"
-!%{I%}:0 <=> %{n%}: %>: %{N%}: _ .#. ;
 %{N%}%{I%}:0 <=> %{n%}: %>: _ .#. ;
+!%{I%}:0 <=> %{n%}: %>: %{N%}: _ .#. ;
 
 "Deletion of dative {G} after px1sg, px2sg"
 %{G%}:0 <=>  %{I%}: NasalCns %>: _ %{A%}: .#. ;
 
+"L Desonorisation"
+%{L%}:д <=> VoicedLowSonCns %>: _ ;
+
+"N Desonorisation"
+%{N%}:д <=> VoicedCns %>: _ ;
+!!%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
+
+"Devoicing of stops etc. across morpheme boundary after voiceless consonants" !!"Katkalan harmony in consonants"
+Cx:Cy <=>  :UnvoicedNonSonCns %>: _ ;   !Cx:Cy <=>  UnvoicedNonSonCns %>: _ ;
+        where Cx in ( %{B%}  %{G%}  %{D%}  %{L%}  %{N%} )
+              Cy in (   п      к      т      т      т)
+              matched;
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!! UyanCons = м ң М Ң ;
+
+!!SonCns = й р Й Р ;
+
+
+!VoicedNonSonCns = Б В Г Д Ж З Л М Н Ң Й Р    ! This is half sonorants!
+!                  б в г д ж з л м н ң й р ;
+!
+!VoicedNonSonCnsNoRNoY = Б В Г Д Ж З Л М Н Ң  
+!                  б в г д ж з л м н ң ;
+
+!!"Suffix vowel {I} insertion in consonant stems"
+!!0:Vy <=> :LastVowel NotVowel:* Cns: %>: _ NotVowel: .#. ; 
+!!      where Vy in        (   и     ү     и     и     ү     ы     ы     у     у     ы     у     у   )
+!!            LastVowel in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
+!!       matched;
+
+!!"Realisation of converb marker after vowels"
+!!%{E%}:й <=> SurVow %>: _ ;
 
 !!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
 
@@ -170,19 +184,6 @@ Cx:0 <=> %{n%}: %>: _ ;
 !
 !"{U} deletion in vowel final stem"
 !%{U%}:0 <=> Vow %>: _ %{U%}: ; 
-
-"L Desonorisation"
-%{L%}:д <=> VoicedLowSonCns %>: _ ;
-
-"N Desonorisation"
-%{N%}:д <=> VoicedCns %>: _ ;
-!!%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
-
-"Devoicing of stops etc. across morpheme boundary after voiceless consonants" !!"Katkalan harmony in consonants"
-Cx:Cy <=>  :UnvoicedNonSonCns %>: _ ;   !Cx:Cy <=>  UnvoicedNonSonCns %>: _ ;
-        where Cx in ( %{B%}  %{G%}  %{D%}  %{L%}  %{N%} )
-              Cy in (   п      к      т      т      т)
-              matched;
 
 ! REWRITE
 !"{D} -> н after {I} and before {A} in ablative" 
