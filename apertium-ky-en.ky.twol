@@ -143,7 +143,7 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
 
 "Deletion of case-initial consonants after {n} (except locative)"
 Cx:0 <=> %{n%}: %>: _ ;
-        where Cx in ( %{N%} %{G%} )
+        where Cx in ( %{N%} %{G%} %{D%} )
 		        matched;
 
 "Deletion of extra {I} for accusative after {n}"
