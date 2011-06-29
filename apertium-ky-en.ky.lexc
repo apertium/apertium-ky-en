@@ -141,13 +141,22 @@ Punctuation ;
 Interjections ;
 Abbreviations ;
 
-LEXICON CASES
+
+LEXICON CASES-DEFAULT
 %<nom%>: # ;                 ! -     -      -
 %<gen%>:%>%{N%}%{I%}н # ;      ! -нын, -нин, -дын, -дин, -тын, -тин, -нун, -нүн, -дун, -дүн, -тун, -түн
 %<dat%>:%>%{G%}%{A%} # ;       ! -га, -ка, -ге, -ке, -го, -ко, -гө, -кө
 %<acc%>:%>%{N%}%{I%} # ;       ! -ны, -ни, -ды, -ди, -ты, -ти, -ну, -нү, -ду, -дү, -ту, -тү
 %<loc%>:%>%{D%}%{A%} # ;       ! -да, -де, -та, -те, -до, -дө, -то, -тө
-%<abl%>:%>%{D%}%{A%}н # ;      ! -дан, -ден, -тан, -тен, -дон, -дөн, -тон, -төн
+
+LEXICON CASES
+CASES-DEFAULT ;
+%<abl%>:%>%{D%}%{A%}н # ;      ! 
+
+LEXICON CASES-PX12SG
+CASES-DEFAULT ;
+%<abl%>:%>%{D%}%{A%}н # ;      ! Dir/LR 
+%<abl%>:%>%{A%}н # ;      
 
 
 !LEXICON CASES-SINGULAR-PRONOUNS
@@ -173,14 +182,19 @@ CASES ;
 %<px%>:%>%{N%}%{I%}к%{I%}%{n%} CASES ; !CASES-SHORT-ACC ; 
 %<rloc%>:%>%{D%}%{A%}г%{I%} CASES ;
 
+LEXICON GEN-POS-PX12SG
+CASES-PX12SG ;
+%<px%>:%>%{N%}%{I%}к%{I%}%{n%} CASES ; !CASES-SHORT-ACC ; 
+%<rloc%>:%>%{D%}%{A%}г%{I%} CASES ;
+
 !! LEXICON GEN-POS-SHORT-ACC
 !! CASES-SHORT-ACC ;
 !! %<px%>:%>%{N%}%{I%}к%{I%} CASES-SHORT-ACC ; 
 
 LEXICON POSSESSION
 GEN-POS ;
-%<px1sg%>:%>%{I%}м GEN-POS ;
-%<px2sg%>:%>%{I%}ң GEN-POS ; 
+%<px1sg%>:%>%{I%}м GEN-POS-PX12SG ;
+%<px2sg%>:%>%{I%}ң GEN-POS-PX12SG ; 
 %<px2sg%>%<frm%>:%>%{I%}ң%{I%}з GEN-POS ; 
 %<px3sg%>:%>%{S%}%{I%}%{n%} GEN-POS ;
 %<px1pl%>:%>%{I%}б%{I%}з GEN-POS ; 
