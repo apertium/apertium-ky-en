@@ -39,7 +39,10 @@ BackRndVow =  О У о у Ю ю Ё ё ;
 BackLowRndVow = О о Ё ё ;
 !! UyanCons = м ң М Ң ;
 
-SonCns = й р Й Р ;
+!!SonCns = й р Й Р ;
+NasalCns = м н ң
+           М Н Ң ;
+
 UnvoicedNonSonCns = К П С Т Ф Х Ц Ч Ш Щ  
 	                к п с т ф х ц ч ш щ ;
 
@@ -124,13 +127,6 @@ Vx:Vy <=> :LastVowel [ :Cns [ :0 | %>: | :Cns ]* | [ :0 | %>: | :Cns ]* :Cns ] _
               LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
               matched ; 
 
-!!"Vowel harmony for archiphoneme {E}"
-!!Vx:Vy <=> :LastVowel NotVowel:* _ ; 
-!!        where Vx         in ( %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} %{E%} )
-!!              Vy         in (   е     ө     е     е     ө     а     а     о     о     а     а     а   )
-!!              LastVowel  in (   и     ү     е     э     ө     я     а     ё     о     ы     ю     у   )
-!!              matched ; 
-
 "Voiceless non-coronal stop voicing"
 Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ; 
         where Cx in (  п   к  )
@@ -154,7 +150,7 @@ Cx:0 <=> %{n%}: %>: _ ;
 %{N%}%{I%}:0 <=> %{n%}: %>: _ .#. ;
 
 "Deletion of dative {G} after px1sg, px2sg"
-%{G%}:0 <=> [:0 | %>: ]* [ :м | :ң ] %>: _ %{A%}: .#. ;
+%{G%}:0 <=>  %{I%}: NasalCns %>: _ %{A%}: .#. ;
 
 
 !!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
@@ -180,21 +176,13 @@ Cx:0 <=> %{n%}: %>: _ ;
 
 "N Desonorisation"
 %{N%}:д <=> VoicedCns %>: _ ;
-!%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
-
-!!"L Desonorisation and devoicing"
-!!Cx:т <=> [ UnvoicedNonSonCns | UnvoicedNonSonCns ь ] %>: _ ;
-!!	where Cx in ( %{L%} %{N%} ) ;
+!!%{N%}:д <=> [ SonCns | VoicedNonSonCns ] %>:  _ ;
 
 "Devoicing of stops etc. across morpheme boundary after voiceless consonants" !!"Katkalan harmony in consonants"
 Cx:Cy <=>  :UnvoicedNonSonCns %>: _ ;   !Cx:Cy <=>  UnvoicedNonSonCns %>: _ ;
         where Cx in ( %{B%}  %{G%}  %{D%}  %{L%}  %{N%} )
               Cy in (   п      к      т      т      т)
               matched;
-
-!! "B -> п in negative"  ! not just negative, but everywhere
-!! %{B%}:п <=> UnvoicedNonSonCns: %>: _  ;
-
 
 ! REWRITE
 !"{D} -> н after {I} and before {A} in ablative" 
