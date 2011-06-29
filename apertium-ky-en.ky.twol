@@ -141,6 +141,16 @@ Cx:Cy <=> :SurVow _ %>: (:0) :SurVow ;
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+"Deletion of case-initial consonants after {n} (except locative)"
+Cx:0 <=> %{n%}: %>: _ ;
+        where Cx in ( %{N%} %{G%} )
+		        matched;
+
+"Deletion of extra {I} for accusative after {n}"
+{I}:0 <=> %{n%}: %>: :0 _ .#. ;
+
+!!"(optional) deletion of {D} in ablative after px1sg, px2sg, px3"
+
 ! REWRITE
 !"Harmonise stem ending before infinitive"
 !Vx:Vy <=> Cns _ %>: %{U%}: %{U%}: ; 
